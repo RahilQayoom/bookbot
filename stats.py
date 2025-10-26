@@ -21,8 +21,37 @@ def get_book_text(path_to_file):
 def get_char_count(words_from_book):
     char_count = dict()
     for char in words_from_book.lower():
-        char_count[char] = char_count.get(char, 0) + 1     
+        char_count[char] = char_count.get(char, 0 ) + 1     
     return char_count
+
+ 
+def sort_on(items):
+    return items["num"]
+def get_sort_dict(dic):
+    sorted_dict = dict()
+    list_of_dict = list()
+    for key in dic:
+        if key.isalpha():
+
+            sorted_dict = {"char": f"{key}", "num": dic[key]}
+            list_of_dict.append(sorted_dict)
+            sorted_dict = dict()
+    list_of_dict.sort(reverse=True, key=sort_on)
+    return list_of_dict
+
+
+def print_report(count_of_words,soretd_dic):
+    print("============ BOOKBOT ============")
+    print("Analyzing book found at books/frankenstein.txt...")
+    print("----------- Word Count ----------")
+    print(f"Found {count_of_words} total words")
+    print("--------- Character Count -------")
+    
+    ##for index, value in enumerate(soretd_dic):
+        ##print(f"{soretd_dic[index]["char"]}: {soretd_dic[index]["num"]}")
+    for dic in soretd_dic:
+        print(f"{dic["char"]}: {dic["num"]}")
+    print("============= END ===============")
 
 
 # from boots more elegant and right solution 
@@ -34,6 +63,7 @@ def get_char_count(words_from_book):
 
 def get_word_count(file_content):
     book_text = file_content.split()
+    # just found out actually did not think about it i could just have used len() instead of using for loop do the counting !
     total_count:int = 0
     for i in book_text:
         total_count += 1
